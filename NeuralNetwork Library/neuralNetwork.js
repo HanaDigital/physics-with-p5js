@@ -1,5 +1,11 @@
-function NeuralNetwork(numOfInputs, numOfHidden, numOfOutput) {
-    this.input_nodes = numOfInputs;
-    this.hidden_nodes = numOfHidden;
-    this.output_nodes = numOfOutput;
+class NueralNetwork {
+    constructor(input_nodes, hidden_nodes, output_nodes) {
+        this.input_nodes = input_nodes;
+        this.hidden_nodes = hidden_nodes;
+        this.output_nodes = output_nodes;
+    }
+
+    feedForward() {
+
+    }
 }
