@@ -1,16 +1,10 @@
 function setup() {
     createCanvas(800, 800);
 
-    let a = new Matrix(2, 2);
-    a.randomize();
-    a.print();
-
-    function doubleIt(x) {
-        return x * 2;
-    }
-
-    a.map(doubleIt);
-    a.print();
+    let nn = new NueralNetwork(2, 2, 1);
+    let input = [1, 0];
+    let output = nn.feedForward(input);
+    console.log(output);
 }
 
 function draw() {
