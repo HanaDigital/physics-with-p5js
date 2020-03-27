@@ -30,6 +30,17 @@ class Matrix {
         }
     }
 
+    // Return new matrix => a - b
+    static subtract(a, b) {
+        let result = new Matrix(a.rows, a.cols);
+        for(let i = 0; i < result.rows; i++) {
+            for(var j = 0; j < result.cols; j++) {
+                result.data[i][j] = a.data[i][j] - b.data[i][j];
+            }
+        }
+        return result;
+    }
+
     // Multiply a scalar number to each value of the matrix
     multiply(n) {
         for(let i = 0; i < this.rows; i++) {
@@ -69,11 +80,11 @@ class Matrix {
     }
 
     // Transpose the matrix
-    transpose() {
-        let result = new Matrix(this.cols, this.rows);
-        for(let i = 0; i < this.rows; i++) {
-            for(var j = 0; j < this.cols; j++) {
-                result.data[j][i] = this.data[i][j];
+    static transpose(matrix) {
+        let result = new Matrix(matrix.cols, matrix.rows);
+        for(let i = 0; i < matrix.rows; i++) {
+            for(var j = 0; j < matrix.cols; j++) {
+                result.data[j][i] = matrix.data[i][j];
             }
         }
         return result;
@@ -85,7 +96,6 @@ class Matrix {
         for (let i = 0; i < arr.length; i++) {
             m.data[i][0] = arr[i];
         }
-        m.print();
         return m;
     }
 
