@@ -79,6 +79,17 @@ class Matrix {
         }
     }
 
+    static map(matrix, func) {
+        let result = new Matrix(matrix.rows, matrix.cols);
+        for(let i = 0; i < matrix.rows; i++) {
+            for(var j = 0; j < matrix.cols; j++) {
+                let val = matrix.data[i][j];
+                result.data[i][j] = func(val);
+            }
+        }
+        return result;
+    }
+
     // Transpose the matrix
     static transpose(matrix) {
         let result = new Matrix(matrix.cols, matrix.rows);
