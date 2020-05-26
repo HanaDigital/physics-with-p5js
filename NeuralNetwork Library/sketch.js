@@ -31,7 +31,7 @@ function setup() {
 function draw() {
     background(0);
 
-    for(let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 1000; i++) {
         let data = random(training_data);
         nn.train(data.inputs, data.outputs);
     }
@@ -41,8 +41,8 @@ function draw() {
     let resolution = 10;
     let cols = width / resolution;
     let rows = height / resolution;
-    for(let i = 0; i < cols; i++) {
-        for(let j = 0; j < rows; j++) {
+    for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
             let x1 = i / cols;
             let x2 = j / rows;
             let inputs = [x1, x2];
