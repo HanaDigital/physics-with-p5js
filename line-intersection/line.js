@@ -28,22 +28,21 @@ class Line {
         slope1 = (this.y2 - this.y1) / (this.x2 - this.x1)
         slope2 = (other.y2 - other.y1) / (other.x2 - other.x1)
 
-        if(slope1 != slope2) {
+        if (slope1 != slope2) {
             eq1 = (slope1 * -this.x1) + this.y1;
             eq2 = (slope2 * -other.x1) + other.y1;
-           // print(slope1);
-           
-           slope = slope1 + (-slope2);
-           eq = -eq1 + eq2;
-           
-           xi = eq / slope;
-           
-           yi = (slope1 * xi) + eq1;
-           print(xi + " " + yi);
-           
-           strokeWeight(10);
-           stroke('red');
-           point(xi, yi);
-         }
-    } 
+            // print(slope1);
+
+            slope = slope1 + (-slope2);
+            eq = -eq1 + eq2;
+
+            xi = eq / slope;
+
+            yi = (slope1 * xi) + eq1;
+
+            strokeWeight(10);
+            stroke('red');
+            point(xi, yi);
+        }
+    }
 }
