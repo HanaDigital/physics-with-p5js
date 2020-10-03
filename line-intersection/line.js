@@ -4,7 +4,9 @@ class Line {
     length = 0;
     angle = 0;
 
-    ogLength = 0;
+    i_x2 = 0;
+    i_y2 = 0;
+    i_length = 0;
 
     x2 = 0;
     y2 = 0;
@@ -24,12 +26,17 @@ class Line {
     }
 
     draw() {
-        if(!this.hit) {
-            this.x2 = this.x1 + (this.length * Math.sin(this.angle))
-            this.y2 = this.y1 + (this.length * Math.cos(this.angle))
-        } 
+        this.x2 = this.x1 + (this.length * Math.sin(this.angle))
+        this.y2 = this.y1 + (this.length * Math.cos(this.angle))
 
-        line(this.x1, this.y1, this.x2, this.y2);
+        if(this.hit) {
+            this.i_x2 = this.x1 + (this.i_length * Math.sin(this.angle))
+            this.i_y2 = this.y1 + (this.i_length * Math.cos(this.angle))
+            line(this.x1, this.y1, this.i_x2, this.i_y2);
+        } else {
+
+            line(this.x1, this.y1, this.x2, this.y2);
+        }
     }
 
     move(x) {
@@ -47,17 +54,18 @@ class Line {
         const u = (((this.x1 - this.x2) * (this.y1 - other.y1)) - ((this.y1 - this.y2) * (this.x1 - other.x1))) / denominator;
 
         if(t > 0 && t < 1 && u < 0) {
-            // this.hit = true;
+            this.hit = true;
             const poi_x = (this.x1 + t * (this.x2 - this.x1));
             const poi_y = (this.y1 + t * (this.y2 - this.y1));
 
-            const length = Math.sqrt(Math.pow(this.x1 - poi_x, 2) + Math.pow(this.y1 - poi_y, 2))
+            this.i_length = Math.sqrt(Math.pow(this.x1 - poi_x, 2) + Math.pow(this.y1 - poi_y, 2));
 
             stroke('red');
             ellipse(poi_x, poi_y, 16);
         } else {
-            // this.hit = false;
+            this.hit = false;
         }
+        return "GOOD TO GO"
     }
 }
 
