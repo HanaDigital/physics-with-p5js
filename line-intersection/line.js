@@ -36,42 +36,66 @@ class Line {
         this.angle += x;
     }
 
-    intersect(other) {
-        // y = mx + c
-        // Slope
-        this.slope = (this.y2 - this.y1) / (this.x2 - this.x1);
-        other.slope = (other.y2 - other.y1) / (other.x2 - other.x1);
+    intersect(other){
+        const denominator = ((this.x1 - this.x2) * (other.y1 - other.y2)) - ((this.y1 - this.y2) * (other.x1 - other.x2)) 
+        if(denominator == 0) {
+            console.log("The lines are parallel");
+            return undefined;
+        }
 
-        // Constant
-        this.constant = this.y1 - (this.slope * this.x1)
-        other.constant = other.y1 - (other.slope * other.x1)
+        const t = (((this.x1 - other.x1) * (other.y1 - other.y2)) - ((this.y1 - other.y1) * (other.x1 - other.x2))) / denominator;
+        const u = (((this.x1 - this.x2) * (this.y1 - other.y1)) - ((this.y1 - this.y2) * (this.x1 - other.x1))) / denominator;
 
-        // point of intersection
-        const poi_x = (other.constant - this.constant) / (this.slope - other.slope)
-        const poi_y = (this.slope * poi_x) + this.constant;
+        if(t > 0 && t < 1 && u < 0) {
+            // this.hit = true;
+            const poi_x = (this.x1 + t * (this.x2 - this.x1));
+            const poi_y = (this.y1 + t * (this.y2 - this.y1));
 
-        // console.log(poi_x, poi_y)
+            const length = Math.sqrt(Math.pow(this.x1 - poi_x, 2) + Math.pow(this.y1 - poi_y, 2))
 
-        const trueLength = Math.sqrt(Math.pow(this.x2 - this.x1, 2) + Math.pow(this.y2 - this.y1, 2))
-        const expectedLength = Math.sqrt(Math.pow(poi_x - this.x1, 2) + Math.pow(poi_y - this.y1, 2))
-
-        if (Math.round(trueLength) >= Math.round(expectedLength)) { // If ray meets the wall
-            if((poi_x >= other.x1 || poi_x <= other.x2) && (poi_y >= other.y1 || poi_y <= other.y2)) {
-                console.log("HIT")
-                this.hit = true
-
-                this.x2 = poi_x;
-                this.y2 = poi_y;
-
-                stroke('red');
-                strokeWeight(10);
-                point(parseInt(poi_x, 10), parseInt(poi_y, 10));
-            } else{
-                if(this.hit) {
-                    this.hit = false;
-                    // console.log('points are: ' +this.x2 + this.y2);
-                }
-            }
+            stroke('red');
+            ellipse(poi_x, poi_y, 16);
+        } else {
+            // this.hit = false;
         }
     }
 }
+
+// intersect(other) {
+    //     // y = mx + c
+    //     // Slope
+    //     this.slope = (this.y2 - this.y1) / (this.x2 - this.x1);
+    //     other.slope = (other.y2 - other.y1) / (other.x2 - other.x1);
+
+    //     // Constant
+    //     this.constant = this.y1 - (this.slope * this.x1)
+    //     other.constant = other.y1 - (other.slope * other.x1)
+
+    //     // point of intersection
+    //     const poi_x = (other.constant - this.constant) / (this.slope - other.slope)
+    //     const poi_y = (this.slope * poi_x) + this.constant;
+
+    //     // console.log(poi_x, poi_y)
+
+    //     const trueLength = Math.sqrt(Math.pow(this.x2 - this.x1, 2) + Math.pow(this.y2 - this.y1, 2))
+    //     const expectedLength = Math.sqrt(Math.pow(poi_x - this.x1, 2) + Math.pow(poi_y - this.y1, 2))
+
+    //     if (Math.round(trueLength) >= Math.round(expectedLength)) { // If ray meets the wall
+    //         if((poi_x >= other.x1 || poi_x <= other.x2) && (poi_y >= other.y1 || poi_y <= other.y2)) {
+    //             console.log("HIT")
+    //             this.hit = true
+
+    //             this.x2 = poi_x;
+    //             this.y2 = poi_y;
+
+    //             stroke('red');
+    //             strokeWeight(10);
+    //             point(parseInt(poi_x, 10), parseInt(poi_y, 10));
+    //         } else{
+    //             if(this.hit) {
+    //                 this.hit = false;
+    //                 // console.log('points are: ' +this.x2 + this.y2);
+    //             }
+    //         }
+    //     }
+    // }

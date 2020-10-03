@@ -24,6 +24,6 @@ function draw() {
     stroke('brown');
     ray.draw();
 
-    ray.intersect(wall)
     ray.move(0.05)
+    console.log(ray.intersect(wall));
 }
