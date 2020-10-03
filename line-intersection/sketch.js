@@ -3,16 +3,16 @@ function setup() {
 
     ray_x1 = 500;
     ray_y1 = 100;
-    ray_x2 = 600;
-    ray_y2 = 400;
+    ray_length = 100;
+    ray_angle = -80;
 
-    wall_x1 = 500;
-    wall_y1 = 300;
-    wall_x2 = 200;
-    wall_y2 = 200;
+    wall_x1 = 450;
+    wall_y1 = 100;
+    wall_length = 100;
+    wall_angle = 10;
 
-    ray = new Line(ray_x1, ray_y1, ray_x2, ray_y2);
-    wall = new Line(wall_x1, wall_y1, wall_x2, wall_y2);
+    ray = new Line(ray_x1, ray_y1, ray_length, ray_angle);
+    wall = new Line(wall_x1, wall_y1, wall_length, wall_angle);
 }
 
 function draw() {
@@ -25,5 +25,5 @@ function draw() {
     ray.draw();
 
     ray.intersect(wall)
-    // ray.move(-1)
+    ray.move(0.05)
 }
