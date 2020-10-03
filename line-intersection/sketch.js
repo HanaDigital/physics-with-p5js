@@ -1,18 +1,18 @@
 function setup() {
     createCanvas(800, 800);
 
-    line1_x1 = 500;
-    line1_y1 = 100;
-    line1_x2 = 501;
-    line1_y2 = 300;
+    ray_x1 = 500;
+    ray_y1 = 100;
+    ray_x2 = 600;
+    ray_y2 = 400;
 
-    line2_x1 = 600;
-    line2_y1 = 200;
-    line2_x2 = 200;
-    line2_y2 = 300;
+    wall_x1 = 500;
+    wall_y1 = 300;
+    wall_x2 = 200;
+    wall_y2 = 200;
 
-    line1 = new Line(line1_x1, line1_y1, line1_x2, line1_y2);
-    line2 = new Line(line2_x1, line2_y1, line2_x2, line2_y2);
+    ray = new Line(ray_x1, ray_y1, ray_x2, ray_y2);
+    wall = new Line(wall_x1, wall_y1, wall_x2, wall_y2);
 }
 
 function draw() {
@@ -20,9 +20,10 @@ function draw() {
     stroke('black');
     strokeWeight(1);
 
-    line1.draw();
-    line2.draw();
+    wall.draw();
+    stroke('brown');
+    ray.draw();
 
-    line1.intersect(line2)
-    line1.move(1)
+    ray.intersect(wall)
+    // ray.move(-1)
 }
