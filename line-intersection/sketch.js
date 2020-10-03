@@ -25,6 +25,6 @@ function draw() {
     ray.draw();
 
     ray.move(0.05)
-    wall.move(0.1);
+    // wall.move(0.1);
     console.log(ray.intersect(wall));
 }
