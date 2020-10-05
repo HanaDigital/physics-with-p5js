@@ -21,7 +21,7 @@ class Line {
         this.y1 = y1;
         this.length = length;
         this.angle = angle * (Math.PI / 180); // changing to degrees
-        
+
         this.ogLength = length;
     }
 
@@ -29,7 +29,7 @@ class Line {
         this.x2 = this.x1 + (this.length * Math.sin(this.angle))
         this.y2 = this.y1 + (this.length * Math.cos(this.angle))
 
-        if(this.hit) {
+        if (this.hit) {
             this.i_x2 = this.x1 + (this.i_length * Math.sin(this.angle))
             this.i_y2 = this.y1 + (this.i_length * Math.cos(this.angle))
             line(this.x1, this.y1, this.i_x2, this.i_y2);
@@ -43,9 +43,9 @@ class Line {
         this.angle += x;
     }
 
-    intersect(other){
-        const denominator = ((this.x1 - this.x2) * (other.y1 - other.y2)) - ((this.y1 - this.y2) * (other.x1 - other.x2)) 
-        if(denominator == 0) {
+    intersect(other) {
+        const denominator = ((this.x1 - this.x2) * (other.y1 - other.y2)) - ((this.y1 - this.y2) * (other.x1 - other.x2))
+        if (denominator == 0) {
             console.log("The lines are parallel");
             return undefined;
         }
@@ -53,7 +53,7 @@ class Line {
         const t = (((this.x1 - other.x1) * (other.y1 - other.y2)) - ((this.y1 - other.y1) * (other.x1 - other.x2))) / denominator;
         const u = (((this.x1 - this.x2) * (this.y1 - other.y1)) - ((this.y1 - this.y2) * (this.x1 - other.x1))) / denominator;
 
-        if(t > 0 && t < 1 && u < 0) {
+        if (t > 0 && t < 1 && u < 0) {
             this.hit = true;
             const poi_x = (this.x1 + t * (this.x2 - this.x1));
             const poi_y = (this.y1 + t * (this.y2 - this.y1));
