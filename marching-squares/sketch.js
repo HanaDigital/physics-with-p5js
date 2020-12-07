@@ -1,18 +1,30 @@
-const rez = 20;
+const rez = 10;
 let cols, rows;
 const field = [];
 const seed = Date.now();
 const openSimplex = openSimplexNoise(seed);
 const increment = 0.1;
+let zIncrement = 0.1;
 let zoff = 0;
+
+let walls = [];
+let particle;
 
 function setup() {
 	createCanvas(800, 800);
 	cols = 1 + width / rez;
 	rows = 1 + height / rez;
+
+	particle = new Particle();
 }
 
 function draw() {
+	walls = [];
+	walls.push(new Boundary(0, 0, width, 0));
+	walls.push(new Boundary(width, 0, width, height));
+	walls.push(new Boundary(width, height, 0, height));
+	walls.push(new Boundary(0, height, 0, 0));
+
 	background(0);
 
 	let xoff = 0;
@@ -26,7 +38,7 @@ function draw() {
 			yoff += increment;
 		}
 	}
-	zoff += 0.1;
+	zoff += zIncrement;
 
 	for (let i = 0; i < cols; i++) {
 		for (let j = 0; j < height; j++) {
@@ -100,6 +112,14 @@ function draw() {
 			}
 		}
 	}
+
+	for (const wall of walls) {
+		wall.show();
+	}
+
+	particle.update(mouseX, mouseY);
+	particle.show();
+	particle.look(walls);
 }
 
 function getState(a, b, c, d) {
@@ -107,5 +127,5 @@ function getState(a, b, c, d) {
 }
 
 function lineGen(v1, v2) {
-	line(v1.x, v1.y, v2.x, v2.y);
+	walls.push(new Boundary(v1, v2));
 }
