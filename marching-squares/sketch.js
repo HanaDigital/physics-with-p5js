@@ -3,8 +3,10 @@ let cols, rows;
 const field = [];
 const seed = Date.now();
 const openSimplex = openSimplexNoise(seed);
-const increment = 0.1;
-let zIncrement = 0.1;
+const increment = 0.01;
+let zIncrement = 0;
+let xoff = 0;
+let yoff = 0;
 let zoff = 0;
 
 let walls = [];
@@ -20,15 +22,19 @@ function setup() {
 
 function draw() {
 	walls = [];
-	walls.push(new Boundary(0, 0, width, 0));
-	walls.push(new Boundary(width, 0, width, height));
-	walls.push(new Boundary(width, height, 0, height));
-	walls.push(new Boundary(0, height, 0, 0));
+	walls.push(new Boundary(createVector(0, 0), createVector(width, 0)));
+	walls.push(
+		new Boundary(createVector(width, 0), createVector(width, height))
+	);
+	walls.push(
+		new Boundary(createVector(width, height), createVector(0, height))
+	);
+	walls.push(new Boundary(createVector(0, height), createVector(0, 0)));
 
 	background(0);
 
-	let xoff = 0;
-	let yoff = 0;
+	xoff += increment;
+	yoff += increment;
 	for (let i = 0; i < cols; i++) {
 		xoff += increment;
 		yoff = 0;
@@ -48,6 +54,26 @@ function draw() {
 		}
 	}
 
+	geometry();
+
+	for (const wall of walls) {
+		wall.show();
+	}
+
+	particle.update(mouseX, mouseY);
+	particle.show();
+	particle.look(walls);
+}
+
+function getState(a, b, c, d) {
+	return a * 8 + b * 4 + c * 2 + d * 1;
+}
+
+function lineGen(v1, v2) {
+	walls.push(new Boundary(v1, v2));
+}
+
+function geometry() {
 	stroke(255);
 	strokeWeight(1);
 	for (let i = 0; i < cols - 1; i++) {
@@ -112,20 +138,4 @@ function draw() {
 			}
 		}
 	}
-
-	for (const wall of walls) {
-		wall.show();
-	}
-
-	particle.update(mouseX, mouseY);
-	particle.show();
-	particle.look(walls);
-}
-
-function getState(a, b, c, d) {
-	return a * 8 + b * 4 + c * 2 + d * 1;
-}
-
-function lineGen(v1, v2) {
-	walls.push(new Boundary(v1, v2));
 }
