@@ -4,6 +4,8 @@ let x = 0;
 let y = 0;
 let ogX = 0;
 let ogY = 0;
+let prevX = 0;
+let prevY = 0;
 let moved = false;
 
 let pWidth = 100;
@@ -36,12 +38,14 @@ function draw() {
 	strokeWeight(0);
 	color = "green";
 	for (player of players) {
-		if (player.dead || player.uid == socket.id) continue;
+		if (player.dead || player.id == socket.id) continue;
 		fill("red");
 		rect(player.x, player.y, pWidth, pHeight);
 		if (x + pWidth > player.x && x < player.x + pWidth) {
 			if (y + pHeight > player.y && y < player.y + pHeight) {
 				color = "blue";
+				x = prevX;
+				y = prevY;
 			}
 		}
 	}
@@ -53,6 +57,9 @@ function draw() {
 		socket.emit("pos", { x: x, y: y });
 		moved = false;
 	}
+
+	prevX = x;
+	prevY = y;
 }
 
 // Listen for events

@@ -21,12 +21,12 @@ let players = [];
 
 io.on("connection", (socket) => {
 	console.log("Client", socket.id, "has connected.");
-	players.push({ uid: socket.id, x: 0, y: 0, dead: false });
+	players.push({ id: socket.id, x: 0, y: 0 });
 	console.log("Total players:", players.length);
 
 	socket.on("pos", (data) => {
 		for (player of players) {
-			if (player.uid == socket.id) {
+			if (player.id == socket.id) {
 				player.x = data.x;
 				player.y = data.y;
 				break;
@@ -37,13 +37,8 @@ io.on("connection", (socket) => {
 
 	socket.on("disconnect", () => {
 		console.log("Client", socket.id, "has disconnected.");
-		for (player of players) {
-			if (player.uid == socket.id) {
-				player.dead = true;
-			}
-		}
-		console.log(players);
-		console.log("Total players:", players.length);
+		players = players.filter((player) => player.id != socket.id);
+		console.log("Remaining players:", players.length);
 		io.sockets.emit("pos", players);
 	});
 });
