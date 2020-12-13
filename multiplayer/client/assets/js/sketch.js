@@ -6,11 +6,11 @@ let ogX = 0;
 let ogY = 0;
 let moved = false;
 
-let posX = 0;
-let posY = 0;
+let pWidth = 100;
+let pHeight = 100;
 
-let enemyX = 0;
-let enemyY = 0;
+let players = [];
+let color = "green";
 
 function setup() {
 	createCanvas(800, 800);
@@ -22,37 +22,40 @@ function draw() {
 		x = mouseX;
 		ogX = x;
 		if (x < 0) x = 0;
-		else if (x > width) x = width;
+		else if (x > width - pWidth) x = width - pWidth;
 		moved = true;
 	}
 	if (ogY != mouseY) {
 		y = mouseY;
 		ogY = y;
 		if (y < 0) y = 0;
-		else if (y > height) y = height;
+		else if (y > height - pHeight) y = height - pHeight;
 		moved = true;
 	}
+
+	strokeWeight(0);
+	color = "green";
+	for (player of players) {
+		if (player.dead || player.uid == socket.id) continue;
+		fill("red");
+		rect(player.x, player.y, pWidth, pHeight);
+		if (x + pWidth > player.x && x < player.x + pWidth) {
+			if (y + pHeight > player.y && y < player.y + pHeight) {
+				color = "blue";
+			}
+		}
+	}
+
+	fill(color);
+	rect(x, y, pWidth, pHeight);
+
 	if (moved) {
 		socket.emit("pos", { x: x, y: y });
 		moved = false;
 	}
-
-	stroke("green");
-	strokeWeight(10);
-	point(posX, posY);
-
-	stroke("red");
-	strokeWeight(10);
-	point(enemyX, enemyY);
 }
 
 // Listen for events
 socket.on("pos", (data) => {
-	if (data.uid == socket.id) {
-		posX = data.x;
-		posY = data.y;
-	} else {
-		enemyX = data.x;
-		enemyY = data.y;
-	}
+	players = data;
 });
