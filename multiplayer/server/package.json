@@ -1,0 +1,25 @@
+{
+  "name": "multiplayer",
+  "version": "0.0.1",
+  "description": "Multiplayer test with websockets",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HanaDigital/physics-with-p5js.git"
+  },
+  "author": "dr-nyt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HanaDigital/physics-with-p5js/issues"
+  },
+  "homepage": "https://github.com/HanaDigital/physics-with-p5js#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6",
+    "ws": "^7.4.1"
+  }
+}
