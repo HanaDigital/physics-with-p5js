@@ -1,0 +1,84 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Josefin Sans", sans-serif;
+  background: #303030;
+  height: 100vh;
+  display: flex;
+}
+body .panel {
+  width: 400px;
+  height: 100%;
+  background: #151515;
+  color: beige;
+  text-align: center;
+  padding: 1em;
+  padding-top: 2em;
+  box-shadow: 0px 0px 12px -5px rgba(0, 0, 0, 0.5);
+}
+body .panel h1 {
+  margin-bottom: 2em;
+}
+body .panel .settings .setting {
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: center;
+}
+body .panel .settings .setting p {
+  font-size: 1.2em;
+}
+body .panel .settings .setting p span {
+  font-size: 1.5em;
+  color: white;
+  margin-left: 0.2em;
+}
+body .panel .settings .setting .controls {
+  margin-left: 1em;
+  height: 1.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: space-between;
+}
+body .panel .settings .setting .controls .arrow {
+  cursor: pointer;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+}
+body .panel .settings .setting .controls .up {
+  border-bottom: 8px solid greenyellow;
+}
+body .panel .settings .setting .controls .down {
+  border-top: 8px solid red;
+}
+body .panel .settings #save {
+  cursor: pointer;
+  padding: 0.5em;
+  width: 10em;
+  border: none;
+  background: greenyellow;
+  margin-top: 1em;
+  border-radius: 0;
+}
+body .panel .settings button:focus {
+  outline: none;
+}
+body .screen {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .screen #canvas {
+  width: 800px;
+  height: 800px;
+  background: #b4b4b4;
+  box-shadow: 0px 0px 12px -5px rgba(0, 0, 0, 0.5);
+}
