@@ -16,13 +16,20 @@
         <h1>GAME OF LIFE</h1>
         <div class="settings">
             <div class="setting">
-                <p>CANVAS SIZE <span id="canvas-size">800</span></p>
+                <p>CANVAS SIZE <span id="canvas-size"></span></p>
                 <div class="controls">
-                    <div id="canvas-size-up" class="arrow up" onclick="canvasSizeUp()"></div>
-                    <div id="canvas-size-down" class="arrow down" onclick="canvasSizeDown()"></div>
+                    <div id="canvas-size-up" class="arrow up"></div>
+                    <div id="canvas-size-down" class="arrow down"></div>
                 </div>
             </div>
-            <button id="save">SAVE</button>
+            <div class="setting">
+                <p>CELL SIZE <span id="cell-size"></span></p>
+                <div class="controls">
+                    <div id="cell-size-up" class="arrow up"></div>
+                    <div id="cell-size-down" class="arrow down"></div>
+                </div>
+            </div>
+            <button id="save">RUN</button>
         </div>
     </div>
     <div class="screen">
