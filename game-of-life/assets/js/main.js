@@ -69,6 +69,8 @@ function setCellSize() {
 function createCells() {
 	canvas.innerHTML = "";
 	cellsPerRow = canvasSize / cellSize;
+	cells = [];
+	aliveCells = [];
 	for (let x = 0; x < cellsPerRow * cellsPerRow; x++) {
 		const cell = document.createElement("div");
 		cell.className = "cell";
