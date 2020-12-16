@@ -4,8 +4,6 @@
     box-sizing: border-box;
 }
 
-$size: 800px;
-
 body {
     font-family: 'Josefin Sans', sans-serif;
     background: #303030;
@@ -23,7 +21,16 @@ body {
         box-shadow: 0px 0px 12px -5px rgba(0, 0, 0, 0.5);
 
         h1 {
-            margin-bottom: 2em;
+            margin-bottom: 1em;
+        }
+
+        #step-holder {
+            margin-bottom: 1em;
+            font-size: 1.2em;
+
+            span {
+                font-size: 1.5em;
+            }
         }
 
         .settings {
@@ -59,29 +66,56 @@ body {
                     }
 
                     .up {
-                        
                         border-bottom: 8px solid greenyellow;
                     }
 
                     .down {
-                        
                         border-top: 8px solid red;
                     }
                 }
             }
 
-            #save {
-                cursor: pointer;
-                padding: 0.5em;
-                width: 10em;
-                border: none;
-                background: greenyellow;
-                margin-top: 1em;
-                border-radius: 0;
-            }
+            .ctrl-buttons {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
 
-            button:focus {
-                outline: none;
+                .ctrls {
+                    cursor: pointer;
+                    padding: 0.5em;
+                    width: 10em;
+                    border: none;
+                    background: greenyellow;
+                    margin-top: 1em;
+                    border-radius: 0;
+                }
+    
+                .ctrls:focus {
+                    outline: none;
+                }
+
+                #resume {
+                    display: none;
+                    background: rgb(0, 140, 255);
+                    color: white;
+                }
+
+                #pause {
+                    display: none;
+                    background: yellow;
+                }
+
+                #stop {
+                    display: none;
+                    background: rgb(255, 72, 0);
+                    color: white;
+                }
+
+                #clear {
+                    background: rgb(255, 0, 119);
+                    color: white;
+                }
             }
         }
     }

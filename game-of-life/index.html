@@ -14,6 +14,7 @@
 <body>
     <div class="panel">
         <h1>GAME OF LIFE</h1>
+        <p id="step-holder">STEP <span id="step"></span></p>
         <div class="settings">
             <div class="setting">
                 <p>CANVAS SIZE <span id="canvas-size"></span></p>
@@ -29,7 +30,20 @@
                     <div id="cell-size-down" class="arrow down"></div>
                 </div>
             </div>
-            <button id="save">RUN</button>
+            <div class="setting">
+                <p>SPEED <span id="speed"></span></p>
+                <div class="controls">
+                    <div id="speed-up" class="arrow up"></div>
+                    <div id="speed-down" class="arrow down"></div>
+                </div>
+            </div>
+            <div class="ctrl-buttons">
+                <button class="ctrls" id="run">RUN</button>
+                <button class="ctrls" id="resume">RESUME</button>
+                <button class="ctrls" id="pause">PAUSE</button>
+                <button class="ctrls" id="stop">STOP</button>
+                <button class="ctrls" id="clear">CLEAR</button>
+            </div>
         </div>
     </div>
     <div class="screen">
@@ -38,5 +52,6 @@
 </body>
 
 <script src="assets/js/main.js"></script>
+<script src="assets/js/logic.js"></script>
 
 </html>
