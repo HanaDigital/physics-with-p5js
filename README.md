@@ -1,2 +1,2 @@
-# physics-with-p5js
-A physics engine built with p5.js
+# fun-with-p5js
+Fun projects built on p5js
