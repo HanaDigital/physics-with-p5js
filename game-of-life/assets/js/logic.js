@@ -1,8 +1,6 @@
 function gameStep() {
 	if (isPaused) return false;
 
-	step++;
-
 	impCells = [];
 
 	for (const cellID of aliveCells) {
@@ -19,6 +17,8 @@ function gameStep() {
 
 	turnAliveLogic();
 	turnDeadLogic();
+
+	stepUp();
 }
 
 function turnAliveLogic() {

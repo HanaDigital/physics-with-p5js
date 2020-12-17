@@ -10,8 +10,10 @@ const maxCellSize = 20;
 const cellSizeStep = 10;
 
 let speed = 100;
-const maxSpeed = 900;
-const speedStep = 100;
+let realSpeed = 10;
+const maxSpeed = 100;
+const speedStep = 10;
+const speedLimiter = maxSpeed + speedStep;
 
 // Variables
 let cellsPerRow = canvasSize / cellSize;
@@ -24,8 +26,6 @@ let aliveCells = [];
 let impCells = [];
 let turnAlive = [];
 let turnDead = [];
-
-let step = 0;
 
 // Ctrl Buttons
 const run = document.getElementById("run");
@@ -40,7 +40,7 @@ async function runGame() {
 	isRunning = true;
 	while (isRunning) {
 		gameStep();
-		await sleep(speed);
+		await sleep(realSpeed);
 	}
 }
 
@@ -80,6 +80,46 @@ function ctrlState(state) {
 
 function sleep(ms) {
 	return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// Speed Ctrls
+const speedText = document.getElementById("speed");
+const speedUp = document.getElementById("speed-up");
+speedUp.addEventListener("click", increaseSpeed);
+const speedDown = document.getElementById("speed-down");
+speedDown.addEventListener("click", decreaseSpeed);
+
+function increaseSpeed() {
+	if (speed >= maxSpeed) return;
+	speed += speedStep;
+	calcRealSpeed();
+}
+
+function decreaseSpeed() {
+	if (speed <= speedStep) return;
+	speed -= speedStep;
+	calcRealSpeed();
+}
+
+function calcRealSpeed() {
+	realSpeed = speedLimiter - speed;
+	speedText.innerText = speed;
+
+	if (speed >= maxSpeed) {
+		speedUp.style.opacity = "0";
+		speedUp.style.cursor = "default";
+	} else {
+		speedUp.style.opacity = "1";
+		speedUp.style.cursor = "pointer";
+	}
+
+	if (speed <= speedStep) {
+		speedDown.style.opacity = "0";
+		speedDown.style.cursor = "default";
+	} else {
+		speedDown.style.opacity = "1";
+		speedDown.style.cursor = "pointer";
+	}
 }
 
 // Canvas Element
@@ -126,6 +166,20 @@ function setCanvasSize() {
 	}
 
 	setCellSize();
+}
+
+// Steps
+let step = 0;
+const steps = document.getElementById("step");
+
+function stepUp() {
+	step++;
+	steps.innerText = step;
+}
+
+function resetStep() {
+	step = 0;
+	steps.innerText = step;
 }
 
 // Cell Size Elements
@@ -200,9 +254,11 @@ function createCells() {
 }
 
 function resetCells() {
-	steps = 0;
+	step = 0;
 	aliveCells = [];
 	setCanvasSize();
+	resetStep();
+	calcRealSpeed();
 }
 
-setCanvasSize();
+resetCells();
