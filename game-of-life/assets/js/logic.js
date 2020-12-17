@@ -122,3 +122,45 @@ function isEast(i) {
 function isSouth(i) {
 	return i + cellsPerRow < cellsPerRow * cellsPerRow;
 }
+
+// Special Patterns
+document.getElementById("star").addEventListener("click", () => {
+	resetCells();
+	const midCell =
+		Math.pow(Math.floor(cellsPerRow / 2), 2) * 2 + cellsPerRow / 2;
+	console.log(cellsPerRow);
+	document.getElementById("c" + midCell).classList.add("alive");
+	aliveCells.push(midCell);
+
+	// Top left
+	let pos = midCell;
+	while (isNorth(pos) && isWest(pos)) {
+		pos = pos - cellsPerRow - 1;
+		document.getElementById("c" + pos).classList.add("alive");
+		aliveCells.push(pos);
+	}
+
+	// Top right
+	pos = midCell;
+	while (isNorth(pos) && isEast(pos)) {
+		pos = pos - cellsPerRow + 1;
+		document.getElementById("c" + pos).classList.add("alive");
+		aliveCells.push(pos);
+	}
+
+	// Bottom left
+	pos = midCell;
+	while (isSouth(pos) && isWest(pos)) {
+		pos = pos + cellsPerRow - 1;
+		document.getElementById("c" + pos).classList.add("alive");
+		aliveCells.push(pos);
+	}
+
+	// Bottom right
+	pos = midCell;
+	while (isSouth(pos) && isEast(pos)) {
+		pos = pos + cellsPerRow + 1;
+		document.getElementById("c" + pos).classList.add("alive");
+		aliveCells.push(pos);
+	}
+});

@@ -11,6 +11,7 @@ body {
   display: flex;
 }
 body .panel {
+  position: relative;
   width: 400px;
   height: 100%;
   background: #151515;
@@ -99,6 +100,22 @@ body .panel .settings .ctrl-buttons #stop {
 body .panel .settings .ctrl-buttons #clear {
   background: #ff0077;
   color: white;
+}
+body .panel .special {
+  position: absolute;
+  bottom: 2em;
+  right: 2em;
+  left: 2em;
+}
+body .panel .special .special-key {
+  cursor: pointer;
+  padding: 0.5em;
+  width: 10em;
+  border: none;
+  background: #2f90ff;
+  color: white;
+  margin-top: 1em;
+  border-radius: 0;
 }
 body .screen {
   height: 100%;

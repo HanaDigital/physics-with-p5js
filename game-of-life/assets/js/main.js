@@ -1,10 +1,10 @@
 // Defaults
-let canvasSize = 500;
+let canvasSize = 900;
 const minCanvasSize = 100;
 const maxCanvasSize = 900;
 const canvasSizeStep = 100;
 
-let cellSize = 20;
+let cellSize = 10;
 const minCellSize = 10;
 const maxCellSize = 20;
 const cellSizeStep = 10;
