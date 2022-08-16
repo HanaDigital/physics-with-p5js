@@ -41,6 +41,7 @@ class Particle {
                     if (!currentWall.isWall) stroke((1 - (distance / maxDistance)) * 255, ((distance / maxDistance)) * 255, 0);
                     line(this.pos.x, this.pos.y, closest.x, closest.y);
                     stroke(255);
+                    lidarBeep.play();
 
                     if (distance < 2) {
                         currentWall.stop();

@@ -12,15 +12,18 @@
             }
         </style>
 
-        <script src="/p5/p5.js"></script>
-        <script src="/p5/addons/p5.sound.js"></script>
+        <script src="/p5/p5.js" defer></script>
+        <script src="/p5/addons/p5.sound.js" defer></script>
 
-        <script src="sketch.js"></script>
-        <script src="mover.js"></script>
-        <script src="boundary.js"></script>
-        <script src="ray.js"></script>
-        <script src="particle.js"></script>
+        <script src="sketch.js" defer></script>
+        <script src="mover.js" defer></script>
+        <script src="boundary.js" defer></script>
+        <script src="ray.js" defer></script>
+        <script src="particle.js" defer></script>
     </head>
 
-    <body></body>
+    <body>
+        <audio id="lidar_audio" src="beep.mp3" preload="auto"></audio>
+        <audio id="crash_audio" src="crash.wav" preload="auto"></audio>
+    </body>
 </html>

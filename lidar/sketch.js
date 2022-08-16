@@ -5,6 +5,9 @@ let particle;
 let xoff = 0;
 let yoff = 100000;
 
+const lidarBeep = document.getElementById('lidar_audio');
+const crash = document.getElementById('crash_audio');
+
 function setup() {
     createCanvas(800, 800);
     // for (let i = 0; i < 5; i++) {

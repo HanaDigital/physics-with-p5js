@@ -22,5 +22,6 @@ class Mover {
 
     stop() {
         this.velocity = 0;
+        crash.play();
     }
 }
