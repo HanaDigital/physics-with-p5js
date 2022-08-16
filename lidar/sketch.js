@@ -8,6 +8,8 @@ let yoff = 100000;
 const lidarBeep = document.getElementById('lidar_audio');
 const crash = document.getElementById('crash_audio');
 
+let roadImage = null;
+
 function setup() {
     createCanvas(800, 800);
     // for (let i = 0; i < 5; i++) {
@@ -27,6 +29,8 @@ function setup() {
     walls.push(new Mover(width / 1.5, height / 2, width / 1.5, height / 2.1, 1, 200, 400));
 
     particle = new Particle();
+
+    roadImage = loadImage('road.png');
 }
 
 function draw() {

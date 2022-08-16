@@ -7,6 +7,7 @@ class Particle {
         for (let i = 0; i < 90; i++) {
             this.rays.push(new Ray(this.pos, radians(i - 45)))
         }
+        this.carImage = loadImage('car.png');
     }
 
     show() {
@@ -15,9 +16,12 @@ class Particle {
         for (const ray of this.rays) {
             ray.show();
         }
+        image(this.carImage, this.pos.x - (380 / 2), this.pos.y - (100 / 2));
     }
 
     look(walls) {
+        let shouldBeep = false;
+        let beepRate = 1;
         for (const ray of this.rays) {
             let closest = null;
             let record = Infinity;
@@ -41,10 +45,14 @@ class Particle {
                     if (!currentWall.isWall) stroke((1 - (distance / maxDistance)) * 255, ((distance / maxDistance)) * 255, 0);
                     line(this.pos.x, this.pos.y, closest.x, closest.y);
                     stroke(255);
-                    lidarBeep.play();
+                    const newBeepRate = 1 + ((1 - (distance / maxDistance)) * 4);
+                    if (newBeepRate > beepRate) {
+                        beepRate = newBeepRate;
+                    }
+                    shouldBeep = true;
 
                     if (distance < 2) {
-                        currentWall.stop();
+                        if (currentWall.stop) currentWall.stop();
                     }
                 } else {
                     const x2 = this.pos.x + (maxDistance * Math.cos(ray.dir.heading()));
@@ -52,6 +60,11 @@ class Particle {
                     line(this.pos.x, this.pos.y, x2, y2);
                 }
             }
+        }
+
+        if (shouldBeep) {
+            lidarBeep.playbackRate = beepRate;
+            lidarBeep.play();
         }
     }
 
