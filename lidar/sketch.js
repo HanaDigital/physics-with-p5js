@@ -9,9 +9,12 @@ const lidarBeep = document.getElementById('lidar_audio');
 const crash = document.getElementById('crash_audio');
 
 let roadImage = null;
+const roadResize = 250;
+const roadWidth = 566 - roadResize;
+const roadHeight = 360 - roadResize;
 
 function setup() {
-    createCanvas(800, 800);
+    createCanvas(1260, 630);
     // for (let i = 0; i < 5; i++) {
     //     const x1 = random(width);
     //     const y1 = random(height);
@@ -25,22 +28,28 @@ function setup() {
     walls.push(new Boundary(width, height, 0, height, true));
     walls.push(new Boundary(0, height, 0, 0, true));
 
-    walls.push(new Boundary(width / 1.1, height / 2, width / 1.1, height / 4));
-    walls.push(new Mover(width / 1.5, height / 2, width / 1.5, height / 2.1, 1, 200, 400));
+    // walls.push(new Boundary(width / 1.1, height / 1.1, width / 1.1, height / 6));
+    walls.push(new Mover(width / 1.5, 60, width / 1.5, 0, 1, 0, Infinity));
 
     particle = new Particle();
 
-    roadImage = loadImage('road.png');
+    roadImage = loadImage('road.jpg');
 }
 
 function draw() {
     background(0);
+    image(roadImage, 0, (height / 2) - roadHeight / 2, roadWidth, roadHeight);
+    image(roadImage, roadWidth, (height / 2) - roadHeight / 2, roadWidth, roadHeight);
+    image(roadImage, roadWidth * 2, (height / 2) - roadHeight / 2, roadWidth, roadHeight);
+    image(roadImage, roadWidth * 3, (height / 2) - roadHeight / 2, roadWidth, roadHeight);
+
     for (const wall of walls) {
         if (wall.velocity) wall.update();
         wall.show();
     }
+
     // particle.update(noise(xoff) * width, noise(yoff) * height);
-    particle.update(mouseX, height / 2.7);
+    particle.update(mouseX, height / 2);
     particle.show();
     particle.look(walls);
 

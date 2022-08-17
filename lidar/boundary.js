@@ -20,4 +20,8 @@ class Boundary {
             this.velocity = -this.velocity;
         }
     }
+
+    stop() {
+        crash.play();
+    }
 }

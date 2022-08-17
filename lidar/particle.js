@@ -1,5 +1,7 @@
-const maxDistance = 300;
-
+const maxDistance = 400;
+const carResize = 50;
+const carWidth = 150 - carResize;
+const carHeight = 96 - carResize;
 class Particle {
     constructor() {
         this.pos = createVector(width / 2, height / 2);
@@ -16,7 +18,7 @@ class Particle {
         for (const ray of this.rays) {
             ray.show();
         }
-        image(this.carImage, this.pos.x - (380 / 2), this.pos.y - (100 / 2));
+        image(this.carImage, this.pos.x - (carWidth), this.pos.y - (carHeight / 2), carWidth, carHeight);
     }
 
     look(walls) {
@@ -41,7 +43,7 @@ class Particle {
 
             if (closest) {
                 const distance = p5.Vector.dist(this.pos, closest);
-                if (distance < maxDistance) {
+                if (distance < maxDistance && !currentWall.dead) {
                     if (!currentWall.isWall) stroke((1 - (distance / maxDistance)) * 255, ((distance / maxDistance)) * 255, 0);
                     line(this.pos.x, this.pos.y, closest.x, closest.y);
                     stroke(255);
@@ -49,9 +51,9 @@ class Particle {
                     if (newBeepRate > beepRate) {
                         beepRate = newBeepRate;
                     }
-                    shouldBeep = true;
+                    if (!currentWall.isWall) shouldBeep = true;
 
-                    if (distance < 2) {
+                    if (distance < 5) {
                         if (currentWall.stop) currentWall.stop();
                     }
                 } else {
