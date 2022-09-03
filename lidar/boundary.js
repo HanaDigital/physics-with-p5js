@@ -1,3 +1,7 @@
+const truckResize = 400;
+const truckWidth = 1224 - truckResize;
+const truckHeight = 569 - truckResize;
+
 class Boundary {
     constructor(x1, y1, x2, y2, isWall = false, velocity, minHeight, maxHeight) {
         this.a = createVector(x1, y1)
@@ -6,11 +10,20 @@ class Boundary {
         this.velocity = velocity;
         this.minHeight = minHeight;
         this.maxHeight = maxHeight;
+        this.truckImage = loadImage("truck.png");
+
     }
 
     show() {
         stroke(255);
-        line(this.a.x, this.a.y, this.b.x, this.b.y);
+        //line(this.a.x, this.a.y, this.b.x, this.b.y);
+        if(!this.isWall){
+            push()
+            translate(this.a.x - truckWidth + 1000, this.a.y - truckHeight - 300);
+            rotate(-80)
+            image(this.truckImage, 0, 0, truckWidth, truckHeight);
+            pop ()
+        }
     }
 
     update() {

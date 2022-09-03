@@ -3,19 +3,19 @@ const zombieWidth = 288 - zombieResize;
 const zombieHeight = 311 - zombieResize;
 
 class Mover {
-    constructor(x1, y1, x2, y2, velocity, minHeight, maxHeight) {
+    constructor(x1, y1, x2, y2, velocity, minHeight, maxHeight, path) {
         this.a = createVector(x1, y1)
         this.b = createVector(x2, y2)
         this.velocity = velocity;
         this.minHeight = minHeight;
         this.maxHeight = maxHeight;
-        this.zombieImage = loadImage('zombie.gif');
+        this.zombieImage = loadImage(path);
         this.dead = false;
     }
 
     show() {
         stroke(255);
-        line(this.a.x, this.a.y, this.b.x, this.b.y);
+        //line(this.a.x, this.a.y, this.b.x, this.b.y);
         push();
         if (this.velocity > 0) {
             translate(this.a.x - zombieWidth + 130, this.a.y - zombieHeight / 1.3);

@@ -28,8 +28,10 @@ function setup() {
     walls.push(new Boundary(width, height, 0, height, true));
     walls.push(new Boundary(0, height, 0, 0, true));
 
-    // walls.push(new Boundary(width / 1.1, height / 1.1, width / 1.1, height / 6));
-    walls.push(new Mover(width / 1.5, 60, width / 1.5, 0, 1, 0, Infinity));
+    // truck
+    walls.push(new Boundary(width / 1.1, height / 1.1, width / 1.1, height / 6));
+    // zombie
+    walls.push(new Mover(width / 1.5, 60, width / 1.5, 0, 1, 0, height, 'zombie.gif'));
 
     particle = new Particle();
 

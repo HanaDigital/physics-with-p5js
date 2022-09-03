@@ -1,4 +1,4 @@
-const maxDistance = 400;
+const maxDistance = 300;
 const carResize = 50;
 const carWidth = 150 - carResize;
 const carHeight = 96 - carResize;
@@ -6,8 +6,9 @@ class Particle {
     constructor() {
         this.pos = createVector(width / 2, height / 2);
         this.rays = [];
-        for (let i = 0; i < 90; i++) {
-            this.rays.push(new Ray(this.pos, radians(i - 45)))
+        const angle = 90
+        for (let i = 0; i < angle; i++) {
+            this.rays.push(new Ray(this.pos, radians(i - (angle/2))))
         }
         this.carImage = loadImage('car.png');
     }
