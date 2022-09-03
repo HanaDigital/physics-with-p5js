@@ -1,4 +1,3 @@
-const maxDistance = 300;
 const reducer = 0.0425;
 const carResize = 50;
 const carWidth = 150 - carResize;

@@ -1,3 +1,8 @@
+let clicked = false;
+document.addEventListener("click", () => {
+    clicked = true;
+});
+
 let walls = [];
 let movers = [];
 let particle;
@@ -12,6 +17,8 @@ let roadImage = null;
 const roadResize = 250;
 const roadWidth = 566 - roadResize;
 const roadHeight = 360 - roadResize;
+
+const maxDistance = 300;
 
 function setup() {
     createCanvas(1440, 785);
@@ -29,9 +36,9 @@ function setup() {
     walls.push(new Boundary(0, height, 0, 0, true));
 
     // truck
-    walls.push(new Boundary(width / 1.2, height / 1.5, width / 1.2, height / 4));
+    // walls.push(new Boundary(width / 1.2, height / 1.5, width / 1.2, height / 4));
     // zombie
-    //walls.push(new Mover(width / 1.5, 60, width / 1.5, 0, 1.5, 0, height, 'zombie.gif'));
+    walls.push(new Mover(width / 1.5, 60, width / 1.5, 0, 1.5, 0, height, 'zombie.gif'));
 
     particle = new Particle(5);
 
@@ -47,14 +54,18 @@ function draw() {
     image(roadImage, roadWidth * 4, (height / 2) - roadHeight / 2, roadWidth, roadHeight);
 
     for (const wall of walls) {
-        if (wall.velocity) wall.update();
         wall.show();
     }
-
-    // particle.update(noise(xoff) * width, noise(yoff) * height);
-    particle.update();
     particle.show();
     particle.look(walls);
+
+    // particle.update(noise(xoff) * width, noise(yoff) * height);
+    if (clicked) {
+        particle.update();
+        for (const wall of walls) {
+            if (wall.velocity) wall.update();
+        }
+    }
 
     xoff += 0.01;
     yoff += 0.01;
