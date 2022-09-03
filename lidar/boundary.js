@@ -1,6 +1,6 @@
 const truckResize = 400;
-const truckWidth = 1224 - truckResize;
-const truckHeight = 569 - truckResize;
+const truckWidth = 800 - truckResize;
+const truckHeight = 534 - truckResize;
 
 class Boundary {
     constructor(x1, y1, x2, y2, isWall = false, velocity, minHeight, maxHeight) {
@@ -11,18 +11,18 @@ class Boundary {
         this.minHeight = minHeight;
         this.maxHeight = maxHeight;
         this.truckImage = loadImage("truck.png");
-
+        this.isDead = false;
     }
 
     show() {
         stroke(255);
-        //line(this.a.x, this.a.y, this.b.x, this.b.y);
-        if(!this.isWall){
+        // line(this.a.x, this.a.y, this.b.x, this.b.y);
+        if (!this.isWall) {
             push()
-            translate(this.a.x - truckWidth + 1000, this.a.y - truckHeight - 300);
-            rotate(-80)
+            translate(this.a.x + (truckWidth / 2) - 100, this.a.y - (truckHeight * 2.5));
+            rotate(Math.PI / 2)
             image(this.truckImage, 0, 0, truckWidth, truckHeight);
-            pop ()
+            pop()
         }
     }
 
@@ -35,6 +35,9 @@ class Boundary {
     }
 
     stop() {
-        crash.play();
+        if (!this.isDead) {
+            crash.play();
+            this.isDead = true;
+        }
     }
 }

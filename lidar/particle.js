@@ -1,14 +1,16 @@
 const maxDistance = 300;
+const reducer = 0.0425;
 const carResize = 50;
 const carWidth = 150 - carResize;
 const carHeight = 96 - carResize;
 class Particle {
-    constructor() {
-        this.pos = createVector(width / 2, height / 2);
+    constructor(velocity) {
+        this.velocity = velocity;
+        this.pos = createVector(0, height / 2);
         this.rays = [];
         const angle = 90
         for (let i = 0; i < angle; i++) {
-            this.rays.push(new Ray(this.pos, radians(i - (angle/2))))
+            this.rays.push(new Ray(this.pos, radians(i - (angle / 2))))
         }
         this.carImage = loadImage('car.png');
     }
@@ -54,8 +56,11 @@ class Particle {
                     }
                     if (!currentWall.isWall) shouldBeep = true;
 
-                    if (distance < 5) {
-                        if (currentWall.stop) currentWall.stop();
+                    if (distance < 6) {
+                        if (currentWall.stop) {
+                            currentWall.stop();
+                            this.velocity = 0;
+                        }
                     }
                 } else {
                     const x2 = this.pos.x + (maxDistance * Math.cos(ray.dir.heading()));
@@ -68,10 +73,11 @@ class Particle {
         if (shouldBeep) {
             lidarBeep.playbackRate = beepRate;
             lidarBeep.play();
+            this.velocity = Math.max(this.velocity - reducer, 0);
         }
     }
 
-    update(x, y) {
-        this.pos.set(x, y);
+    update() {
+        this.pos.set(this.pos.x + this.velocity, this.pos.y);
     }
 }
